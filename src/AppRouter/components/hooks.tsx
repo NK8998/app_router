@@ -2,16 +2,10 @@ import { useEffect, useState } from "react";
 import { Location } from "./types";
 import { nanoid } from "nanoid";
 import { useAppRouterContext } from "./contexts/AppRouterContext";
-import { useComponentContext } from "./contexts/componentContext";
 import { replaceDynamicParts } from "./util";
 
 export const useLocationInitiator = () => {
-  const [location, setLocation] = useState<Location | null>({
-    pathname: window.location.pathname,
-    key: nanoid(5),
-    pathnamewithsearch: window.location.pathname + window.location.search,
-    search: new URLSearchParams(window.location.search),
-  });
+  const [location, setLocation] = useState<Location | null>(null);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {

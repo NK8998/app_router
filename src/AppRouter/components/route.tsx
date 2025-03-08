@@ -15,7 +15,7 @@ export const Route = ({
   action,
 }: RouteProps) => {
   const [shouldRender, setShouldRender] = useState(false);
-  const { isFetching, setIsFetching } = useAppRouterContext();
+  const { setIsFetching } = useAppRouterContext();
   const { pathname } = useLocation();
   const { parentPath } = useComponentContext();
   const fullParentPath = parentPath + path;
@@ -28,8 +28,9 @@ export const Route = ({
 
   useEffect(() => {
     const shouldRender = initiateRouteMatching(fullParentPath, pathname);
+    setShouldRender(shouldRender);
+
     if (shouldRender) {
-      console.log("My action will run", path);
       handleAction()
         .then((res) => {
           console.log(res);
@@ -39,11 +40,8 @@ export const Route = ({
           console.error("Something went wrong", err);
         });
     }
+  }, [pathname]);
 
-    if (!isFetching) {
-      setShouldRender(shouldRender);
-    }
-  }, [pathname, isFetching]);
   return shouldRender || index ? (
     <ComponentProvider
       initialValue={{ componentChildren: children, parentPath: fullParentPath }}
