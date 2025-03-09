@@ -5,7 +5,9 @@ import App from "./App.tsx";
 import { AppRouterProvider } from "./AppRouter/components/contexts/AppRouterContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <AppRouterProvider>
-    <App />
-  </AppRouterProvider>
+  <StrictMode>
+    <AppRouterProvider persist>
+      <App />
+    </AppRouterProvider>
+  </StrictMode>
 );

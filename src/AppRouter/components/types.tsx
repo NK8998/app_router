@@ -7,13 +7,13 @@ export interface RouteProps {
   path: string;
   componentID?: string;
   action?: () => Promise<string>;
+  visited?: boolean;
 }
 
 export interface RouteEntry extends RouteProps {}
 
 export interface AppRouterProps {
   children: ReactNode;
-  persist?: boolean;
 }
 
 export type Location = {
@@ -27,16 +27,22 @@ export interface AppRouterContextProps {
   location: Location;
   isFetching: boolean;
   setIsFetching: React.Dispatch<SetStateAction<boolean>>;
+  targetRoute: string;
+  setTargetRoute: React.Dispatch<SetStateAction<string>>;
+  persist: boolean;
 }
 
 export interface ComponentContextProps {
   componentChildren: ReactNode;
   parentPath: string;
+  params: { [key: string]: string };
+  // setParams: React.Dispatch<SetStateAction<{ [key: string]: string }>>;
 }
 
 interface InitialValueProps {
   componentChildren?: ReactNode;
   parentPath: string;
+  params: { [key: string]: string };
 }
 
 export interface ComponentProviderProps {

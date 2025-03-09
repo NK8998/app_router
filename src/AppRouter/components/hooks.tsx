@@ -3,6 +3,7 @@ import { Location } from "./types";
 import { nanoid } from "nanoid";
 import { useAppRouterContext } from "./contexts/AppRouterContext";
 import { replaceDynamicParts } from "./util";
+import { useComponentContext } from "./contexts/componentContext";
 
 export const useLocationInitiator = () => {
   const [location, setLocation] = useState<Location | null>(null);
@@ -69,16 +70,19 @@ export const initiateRouteMatching = (
     pathname,
     params
   );
-  const shouldRender = replacedUrl === reducedPath;
+  const render = replacedUrl === reducedPath;
 
-  return shouldRender;
+  return { render, urlParams };
 };
 
 export const useNavigate = () => {
   const { pathname, pathnamewithsearch } = useLocation();
 
   const navigate = (path: string) => {
-    if (path === pathname || path === pathnamewithsearch) return;
+    if (path === pathname || path === pathnamewithsearch) {
+      console.log("same");
+      return;
+    }
     if (typeof path !== "string" || path.trim() === "") {
       console.warn("Invalid path passed to navigate.");
       return;
@@ -93,4 +97,15 @@ export const useNavigate = () => {
   };
 
   return navigate;
+};
+
+export const useParams = () => {
+  const ctx = useComponentContext();
+
+  if (!ctx)
+    throw new Error(
+      "useParams can only be called from within a route component"
+    );
+
+  return ctx.params;
 };

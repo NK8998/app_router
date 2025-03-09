@@ -5,6 +5,25 @@
   text-align: center;
 }
 
+.button-row{
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.button-row a{
+  border: 1px solid purple;
+  padding: 10px;
+}
+
+.moving-ball{
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border-radius: 100%;
+  animation: move 2.5s ease infinite;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -25,6 +44,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes move {
+  0%{
+    transform: translateX(0px);
+  }
+  50%{
+    transform: translateX(500px);
+  }
+  100%{
+    transform: translateX(0px);
+  }
+
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {

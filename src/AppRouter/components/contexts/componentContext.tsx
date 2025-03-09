@@ -1,6 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { ComponentContextProps, ComponentProviderProps } from "../types";
-import { useLocation } from "../hooks";
 
 const ComponentContext = createContext<ComponentContextProps | null>(null);
 
@@ -8,11 +7,16 @@ export const ComponentProvider = ({
   children,
   initialValue,
 }: ComponentProviderProps) => {
-  const { componentChildren, parentPath } = initialValue;
-  const [params, setParams] = useState(null);
+  const { componentChildren, parentPath, params } = initialValue;
+
+  const value: ComponentContextProps = {
+    componentChildren,
+    parentPath,
+    params,
+  };
 
   return (
-    <ComponentContext.Provider value={{ componentChildren, parentPath }}>
+    <ComponentContext.Provider value={value}>
       {children}
     </ComponentContext.Provider>
   );
