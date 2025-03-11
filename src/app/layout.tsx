@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ClientApp from "@/client_routing/ClientApp";
+import ClientApp from "@/client_app/ClientApp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <meta
+        name='google-site-verification'
+        content='q7QXFEFaCviI558A1BjxgeccoPN3XbHu2IUTRYbsVKQ'
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         id='hvd-app'

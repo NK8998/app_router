@@ -1,4 +1,4 @@
-import Link from "@/client_routing/AppRouter/components/Link";
+import Link from "@/client_app/AppRouter/components/Link";
 
 export default function Home() {
   return (

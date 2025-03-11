@@ -1,6 +1,6 @@
-import { useRouteProperties } from "@/client_routing/AppRouter/components/hooks";
-import Player from "@/client_routing/global/player/player";
-import { useAppSelector } from "@/client_routing/store/hooks/hooks";
+import { useRouteProperties } from "@/client_app/AppRouter/components/hooks";
+import Player from "@/client_app/global/player/player";
+import { useAppSelector } from "@/client_app/store/hooks/hooks";
 
 export default function ChannelFeaturedPage() {
   const { featured } = useAppSelector((state) => state.channel);

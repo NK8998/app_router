@@ -8,7 +8,7 @@ import Captions from "./components/captions/captions";
 import Chapters from "./components/chapters/chapters";
 import VideoEl from "./components/videoEl/videoEl";
 import BottomControls from "./components/bottom_controls/bottom_controls";
-import { VideoDetails } from "@/client_routing/types/player_types";
+import { VideoDetails } from "@/client_app/types/player_types";
 
 interface playerProps {
   videoDetails: VideoDetails | null;

@@ -1,8 +1,8 @@
-import Link from "@/client_routing/AppRouter/components/Link";
+import Link from "@/client_app/AppRouter/components/Link";
 import "./watch.css";
-import { useAppSelector } from "@/client_routing/store/hooks/hooks";
-import Player from "@/client_routing/global/player/player";
-import { useRouteProperties } from "@/client_routing/AppRouter/components/hooks";
+import { useAppSelector } from "@/client_app/store/hooks/hooks";
+import Player from "@/client_app/global/player/player";
+import { useRouteProperties } from "@/client_app/AppRouter/components/hooks";
 
 export default function Watch() {
   const { selectedVideo } = useAppSelector((state) => state.watch);

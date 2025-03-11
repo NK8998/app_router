@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { toggleMainGuideVisibility } from "../../../store/app_store/slice";
 import GuideBtn from "./guide_btn";
-import { useAppRouterContext } from "@/client_routing/AppRouter/components/contexts/AppRouterContext";
+import { useAppRouterContext } from "@/client_app/AppRouter/components/contexts/AppRouterContext";
 
 export default function MainGuide() {
   const { windowWidth, mainGuideVisible, miniGuideVisible } = useAppSelector(

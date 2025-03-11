@@ -1,6 +1,6 @@
 "use client";
 
-import { Chapter } from "@/client_routing/types/player_types";
+import { Chapter } from "@/client_app/types/player_types";
 
 export function convertToSeconds(timeString: string): number {
   if (timeString.split(":").length < 3) {

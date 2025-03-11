@@ -4,7 +4,7 @@ import "./guide.css";
 import MainGuide from "./components/main_guide";
 import MiniGuide from "./components/mini_guide";
 import { useLayoutEffect, useState } from "react";
-import { useAppRouterContext } from "@/client_routing/AppRouter/components/contexts/AppRouterContext";
+import { useAppRouterContext } from "@/client_app/AppRouter/components/contexts/AppRouterContext";
 
 export default function Guide() {
   const { windowWidth } = useAppSelector((state) => state.app);

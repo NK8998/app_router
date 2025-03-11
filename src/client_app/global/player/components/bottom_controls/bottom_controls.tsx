@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { usePlayerContext } from "../../context";
-import { useRouteProperties } from "@/client_routing/AppRouter/components/hooks";
+import { useRouteProperties } from "@/client_app/AppRouter/components/hooks";
 
 export default function BottomControls() {
   const { player, playerScope, playerElements } = usePlayerContext();

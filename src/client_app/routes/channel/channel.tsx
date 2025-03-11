@@ -1,9 +1,9 @@
 import {
   useNavigate,
   useParams,
-} from "@/client_routing/AppRouter/components/hooks";
-import Link from "@/client_routing/AppRouter/components/Link";
-import OutLet from "@/client_routing/AppRouter/components/OutLet";
+} from "@/client_app/AppRouter/components/hooks";
+import Link from "@/client_app/AppRouter/components/Link";
+import OutLet from "@/client_app/AppRouter/components/OutLet";
 import "./style.css";
 
 export default function Channel() {

@@ -3,7 +3,7 @@ import {
   Chapter,
   PlayerContextProps,
   VideoDetails,
-} from "@/client_routing/types/player_types";
+} from "@/client_app/types/player_types";
 import {
   createContext,
   ReactNode,

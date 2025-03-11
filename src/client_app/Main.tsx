@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import "./App.css";
+import "./Main.css";
 import { useAppDispatch } from "./store/hooks/hooks";
 import { updateWindowWidth } from "./store/app_store/slice";
 import Guide from "./shell/guide/guide";
 import Masthead from "./shell/masthead/masthead";
 import PageManager from "./routes/PageManager";
 
-function App() {
+function Main() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;
