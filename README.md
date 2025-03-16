@@ -1,7 +1,13 @@
 # Custom Client-Side Router
 
 ## Overview
-This custom client-side router for your web app provides a powerful and flexible way to handle navigation, dynamic routes, nested routes, and persistent components. It enhances user experience by executing actions before route transitions and reducing layout shifts.
+This custom client-side router for your web app provides a powerful and flexible way to handle navigation, dynamic routes, nested routes, and persistent components.
+
+## Location
+The router can be found in the following subdirectory:
+```
+src/client_app/AppRouter
+```
 
 ## Features
 
@@ -62,12 +68,6 @@ export default function ClientApp() {
     </Provider>
   );
 }
-```
-
-## Location
-The router can be found in the following subdirectory:
-```
-src/client_app/AppRouter
 ```
 
 ## Upcoming Features
