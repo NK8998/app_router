@@ -17,21 +17,17 @@ export default function PageManager() {
 
   return (
     <AppRouter>
-      <Route
-        element={<Home />}
-        path='/'
-        action={async () => dispatch(fetchFeed())}
-      />
+      <Route element={<Home />} path='/' action={() => dispatch(fetchFeed())} />
       <Route
         element={<Watch />}
         path='/watch'
-        action={async () => dispatch(fetchSelectedVideo())}
+        action={() => dispatch(fetchSelectedVideo())}
         visited
       />
       <Route
         element={<Channel />}
         path='/channel/:channel'
-        action={async () => dispatch(fetchChannelContent())}
+        action={() => dispatch(fetchChannelContent())}
       >
         <Route element={<ChannelFeaturedPage />} path='/featured' />
         <Route element={<ChannelVideosPage />} path='/videos' />
