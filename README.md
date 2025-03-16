@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Custom Client-Side Router
 
-## Getting Started
+## Overview
+This custom client-side router for your web app provides a powerful and flexible way to handle navigation, dynamic routes, nested routes, and persistent components. It enhances user experience by executing actions before route transitions and reducing layout shifts.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. **Dynamic and Static Route Matching**
+   - Uses `/` notation for static routes.
+   - Uses `/:` notation for dynamic routes.
+   
+2. **Preloading Actions for Smoother Navigation**
+   - Actions are executed before moving to a new route, allowing data fetching or processing before the component renders.
+   - Helps in reducing layout shifts by ensuring the required data is available before rendering.
+   
+3. **Component Persistence**
+   - Components are visually hidden instead of unmounted, preserving state and reducing re-renders.
+   - This feature can be disabled if needed, allowing routes to fully unmount when navigated away from.
+
+4. **Useful APIs**
+   - `useParams`: Access dynamic route parameters.
+   - `useNavigate`: Programmatically navigate between routes.
+   - `useRouteProperties`: Access additional route metadata and properties.
+
+5. **Nested Routing Support**
+   - Routes can be nested indefinitely.
+   - Uses an `<Outlet />` component to render nested routes dynamically.
+
+## Example Usage
+
+### Declaring Routes
+```tsx
+<AppRouter>
+  <Route element={<Home />} path='/' action={() => dispatch(fetchFeed())} />
+  <Route
+    element={<Watch />}
+    path='/watch'
+    action={() => dispatch(fetchSelectedVideo())}
+    visited
+  />
+  <Route
+    element={<Channel />}
+    path='/channel/:channel'
+    action={() => dispatch(fetchChannelContent())}
+  >
+    <Route element={<ChannelFeaturedPage />} path='/featured' />
+    <Route element={<ChannelVideosPage />} path='/videos' />
+    <Route element={<ChannelLiveVideosPage />} path='/live' />
+  </Route>
+  <Route element={<UserHistoryPage />} path='/feed/history' />
+</AppRouter>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Enabling Component Persistence
+```tsx
+export default function ClientApp() {
+  return (
+      <AppRouterProvider persist>
+        <Main />
+      </AppRouterProvider>
+  );
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Upcoming Features
+- **404 Page**: Render a custom 404 page when no routes match.
+- **Fallback Route**: Define a default fallback route if no specific matches are found.
+- **Error Handling**: Show an error page when an action fails.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+This router is designed to provide a seamless user experience, ensuring data is ready before transitions and reducing unnecessary re-renders. More enhancements are on the way!
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
