@@ -69,5 +69,5 @@ export default function ClientApp() {
 
 ---
 
-This router is designed to provide a seamless user experience, ensuring data is ready before transitions and reducing unnecessary re-renders. More enhancements are on the way!
+This router is designed to provide a seamless user experience, ensuring data is ready before transitions and reducing unnecessary layout shifts. Currently there's a bit too many rerenders. Working on fixing this😁.
 
