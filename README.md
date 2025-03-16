@@ -55,11 +55,19 @@ This custom client-side router for your web app provides a powerful and flexible
 ```tsx
 export default function ClientApp() {
   return (
+    <Provider store={store}>
       <AppRouterProvider persist>
         <Main />
       </AppRouterProvider>
+    </Provider>
   );
 }
+```
+
+## Location
+The router can be found in the following subdirectory:
+```
+src/client_app/AppRouter
 ```
 
 ## Upcoming Features
