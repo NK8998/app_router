@@ -6,6 +6,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { BurgerSvg, HvdLogo } from "@/client_app/assets/icons";
 import Link from "@/client_app/AppRouter/components/Link";
+import { useLocation } from "@/client_app/AppRouter/components/hooks";
 
 export default function GuideBtn() {
   const { windowWidth, mainGuideVisible, miniGuideVisible } = useAppSelector(
@@ -14,10 +15,10 @@ export default function GuideBtn() {
 
   const dispatch = useAppDispatch();
 
-  const { targetRoute } = useAppRouterContext();
+  const { pathname } = useLocation();
 
   const handleClick = () => {
-    if (!targetRoute.includes("/watch") && windowWidth > 1200) {
+    if (!pathname.includes("/watch") && windowWidth > 1200) {
       dispatch(toggleMiniGuideVisibility(!miniGuideVisible));
     } else {
       dispatch(toggleMainGuideVisibility(!mainGuideVisible));

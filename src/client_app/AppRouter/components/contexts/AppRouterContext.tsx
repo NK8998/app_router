@@ -11,17 +11,15 @@ export const AppRouterProvider = ({
   children: ReactNode;
   persist?: boolean;
 }) => {
-  const { location, isFetching, setIsFetching } = useLocationInitiator();
-  const [targetRoute, setTargetRoute] = useState("");
-
-  if (!location) return;
+  const { location, setLocation, transitioning, setIsIsTransitioning } =
+    useLocationInitiator();
 
   const value: AppRouterContextProps = {
     location,
-    isFetching,
-    setIsFetching,
-    targetRoute,
-    setTargetRoute,
+    setLocation,
+    transitioning,
+    setIsIsTransitioning,
+
     persist,
   };
 

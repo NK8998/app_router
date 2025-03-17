@@ -27,8 +27,6 @@ export const PlayerProvider = ({
   videoDetails,
   scope,
 }: playerProviderProps) => {
-  console.log(videoDetails);
-
   const [player, setPlayer] = useState<shaka.Player | null>(null);
   const [chapters, setChapters] = useState<Chapter[]>([]);
   const [playerScope, setPlayerScope] = useState<string>(scope);
@@ -134,10 +132,10 @@ export const PlayerProvider = ({
       });
 
       player.addEventListener("trackschanged", () => {
-        console.log("Tracks have been loaded!");
+        // console.log("Tracks have been loaded!");
       });
       player.addEventListener("adaptation", (event) => {
-        console.log(event);
+        // console.log(event);
       });
 
       setPlayer(player);

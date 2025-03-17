@@ -5,23 +5,22 @@ import MainGuide from "./components/main_guide";
 import MiniGuide from "./components/mini_guide";
 import { useLayoutEffect, useState } from "react";
 import { useAppRouterContext } from "@/client_app/AppRouter/components/contexts/AppRouterContext";
+import { useLocation } from "@/client_app/AppRouter/components/hooks";
 
 export default function Guide() {
   const { windowWidth } = useAppSelector((state) => state.app);
-  const { targetRoute } = useAppRouterContext();
+  const { pathname } = useLocation();
   const [resizeStyle, setResizeStyle] = useState("");
   const [watchStyle, setWatchStyle] = useState("");
 
   useLayoutEffect(() => {
-    setWatchStyle(targetRoute.includes("/watch") ? "watch-active" : "");
+    setWatchStyle(pathname.includes("/watch") ? "watch-active" : "");
     setResizeStyle(
-      !targetRoute.includes("/watch") && windowWidth <= 1200
-        ? "mini-active"
-        : ""
+      !pathname.includes("/watch") && windowWidth <= 1200 ? "mini-active" : ""
     );
-  }, [windowWidth, targetRoute]);
+  }, [windowWidth, pathname]);
 
-  if (!windowWidth || !targetRoute) return <></>;
+  if (!windowWidth || !pathname) return <></>;
   return (
     <div className={`guide-wrapper ${watchStyle} ${resizeStyle}`}>
       <MainGuide />

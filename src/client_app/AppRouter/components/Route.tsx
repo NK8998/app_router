@@ -6,6 +6,7 @@ import {
 import { initiateRouteMatching, useLocation } from "./hooks";
 import { RouteProps } from "./types";
 import { useAppRouterContext } from "./contexts/AppRouterContext";
+import { nanoid } from "@reduxjs/toolkit";
 
 export const Route = ({
   element,
@@ -17,47 +18,43 @@ export const Route = ({
   const [isVisited, setIsVisited] = useState(visited);
   const [updateUI, setUpdateUI] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
-  const { persist, isFetching, setIsFetching, targetRoute, setTargetRoute } =
+  const { persist, transitioning, setIsIsTransitioning, setLocation } =
     useAppRouterContext();
   const [params, setParams] = useState({});
-  const { pathname, pathnamewithsearch } = useLocation();
   const { parentPath } = useComponentContext();
   const fullParentPath = parentPath + path;
 
   useEffect(() => {
-    if (isFetching) return;
+    if (transitioning) return;
     setUpdateUI(shouldRender);
-    shouldRender && setIsVisited(true);
-  }, [targetRoute, shouldRender, isFetching]);
+    setIsVisited(shouldRender);
+  }, [transitioning, shouldRender]);
 
   useEffect(() => {
     const { render, urlParams } = initiateRouteMatching(
       fullParentPath,
-      pathname
+      window.location.pathname
     );
     setShouldRender(render);
     handleTransition(render);
     setParams(urlParams);
-  }, [pathnamewithsearch]);
+  }, [transitioning]);
 
-  const handleAction = async () => {
-    if (action) {
-      return await action();
-    }
-  };
-
-  const handleTransition = (render: boolean) => {
+  const handleTransition = async (render: boolean) => {
     if (render && action) {
-      handleAction()
-        .then(() => {
-          setTargetRoute(pathnamewithsearch);
-          setIsVisited(true);
-        })
+      await action()
         .catch((err) => {
           console.error("Something went wrong", err);
         })
         .finally(() => {
-          setIsFetching(false);
+          setIsIsTransitioning(false);
+          setLocation({
+            key: nanoid(6),
+            pathname: window.location.pathname,
+            search: window.location.search,
+            pathnamewithsearch:
+              window.location.pathname + window.location.search,
+          });
         });
     }
   };

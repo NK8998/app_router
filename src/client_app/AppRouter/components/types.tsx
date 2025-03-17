@@ -26,10 +26,9 @@ export type Location = {
 
 export interface AppRouterContextProps {
   location: Location;
-  isFetching: boolean;
-  setIsFetching: React.Dispatch<SetStateAction<boolean>>;
-  targetRoute: string;
-  setTargetRoute: React.Dispatch<SetStateAction<string>>;
+  setLocation: React.Dispatch<SetStateAction<Location>>;
+  transitioning: boolean;
+  setIsIsTransitioning: React.Dispatch<SetStateAction<boolean>>;
   persist: boolean;
 }
 

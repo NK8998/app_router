@@ -3,15 +3,16 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks/hooks";
 import { toggleMainGuideVisibility } from "../../../store/app_store/slice";
 import GuideBtn from "./guide_btn";
 import { useAppRouterContext } from "@/client_app/AppRouter/components/contexts/AppRouterContext";
+import { useLocation } from "@/client_app/AppRouter/components/hooks";
 
 export default function MainGuide() {
   const { windowWidth, mainGuideVisible, miniGuideVisible } = useAppSelector(
     (state) => state.app
   );
-  const { targetRoute } = useAppRouterContext();
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const mainGuideOuterRef = useRef<HTMLDivElement>(null);
-  const isWatchPage = targetRoute.includes("/watch");
+  const isWatchPage = pathname.includes("/watch");
   const showTopSection = windowWidth <= 1200 || isWatchPage;
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function MainGuide() {
       mainGuideOuterRef.current.classList.remove("show");
       dispatch(toggleMainGuideVisibility(false));
     }
-  }, [windowWidth, targetRoute]);
+  }, [windowWidth, pathname]);
 
   return (
     <div

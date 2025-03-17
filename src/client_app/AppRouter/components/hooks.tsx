@@ -6,18 +6,17 @@ import { replaceDynamicParts } from "./util";
 import { useComponentContext } from "./contexts/ComponentContext";
 
 export const useLocationInitiator = () => {
-  const [location, setLocation] = useState<Location | null>(null);
-  const [isFetching, setIsFetching] = useState(true);
+  const [location, setLocation] = useState<Location>({
+    key: nanoid(),
+    pathname: "",
+    search: {},
+    pathnamewithsearch: "",
+  });
+  const [transitioning, setIsIsTransitioning] = useState(true);
 
   useEffect(() => {
     const updateLocation = () => {
-      setIsFetching(true);
-      setLocation({
-        pathname: window.location.pathname,
-        key: nanoid(5),
-        pathnamewithsearch: window.location.pathname + window.location.search,
-        search: new URLSearchParams(window.location.search),
-      });
+      setIsIsTransitioning(true);
     };
 
     const originalPushState = window.history.pushState;
@@ -41,8 +40,6 @@ export const useLocationInitiator = () => {
 
     window.addEventListener("popstate", updateLocation);
 
-    updateLocation();
-
     //is clean up needed ??
     return () => {
       window.history.pushState = originalPushState;
@@ -51,7 +48,7 @@ export const useLocationInitiator = () => {
     };
   }, []);
 
-  return { location, setLocation, isFetching, setIsFetching };
+  return { location, setLocation, transitioning, setIsIsTransitioning };
 };
 
 export const useLocation = () => {
@@ -76,9 +73,10 @@ export const initiateRouteMatching = (
 };
 
 export const useNavigate = () => {
-  const { pathname, pathnamewithsearch } = useLocation();
-
   const navigate = (path: string) => {
+    const pathname = window.location.pathname;
+    const pathnamewithsearch =
+      window.location.pathname + window.location.search;
     if (path === pathname || path === pathnamewithsearch) {
       console.log("same");
       return;
