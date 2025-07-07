@@ -6,7 +6,12 @@ import { replaceDynamicParts } from "./util";
 import { useComponentContext } from "./contexts/ComponentContext";
 
 export const useLocationInitiator = () => {
-  const [location, setLocation] = useState<Location | null>(null);
+  const [location, setLocation] = useState<Location>({
+    pathname: "",
+    key: nanoid(5),
+    pathnamewithsearch: "",
+    search: "",
+  });
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {

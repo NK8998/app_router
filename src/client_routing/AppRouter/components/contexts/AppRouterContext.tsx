@@ -14,8 +14,6 @@ export const AppRouterProvider = ({
   const { location, isFetching, setIsFetching } = useLocationInitiator();
   const [targetRoute, setTargetRoute] = useState("");
 
-  if (!location) return;
-
   const value: AppRouterContextProps = {
     location,
     isFetching,
