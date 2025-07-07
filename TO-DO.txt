@@ -1,0 +1,4 @@
+///////////////////////////////////////
+Add all actions to be called in state then once done update the location
+//////////////////////////////////////
+Reset the found routes variable to know when to display 404 page
